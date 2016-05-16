@@ -37,20 +37,20 @@ my $block = Q:to/HERE/;
 \
     block
 HERE
-is ogdl.parse($block, :rule<block>), $block, 'block';
-is ogdl.parse("\f", :rule<char_end>), "\f", 'char_end';
-nok ogdl.parse(" ", :rule<char_end>), 'char_end';
-is ogdl.parse("'abcd'", :rule<element>), "'abcd'", 'element';
-is ogdl.parse("ab", :rule<element>), "ab", 'element';
-is ogdl.parse("abcd\n", :rule<line>), "abcd\n", 'line';
-is ogdl.parse("  abcd\n", :rule<line>), "  abcd\n", 'line';
-is ogdl.parse("ab,cd\n", :rule<line>), "ab,cd\n", 'line';
+is ogdl.parse($block,         :rule<block>), $block, 'block';
+is ogdl.parse("\f",           :rule<char_end>), "\f", 'char_end';
+nok ogdl.parse(" ",           :rule<char_end>), 'char_end';
+is ogdl.parse("'abcd'",       :rule<element>), "'abcd'", 'element';
+is ogdl.parse("ab",           :rule<element>), "ab", 'element';
+is ogdl.parse("abcd\n",       :rule<line>), "abcd\n", 'line';
+is ogdl.parse("  abcd\n",     :rule<line>), "  abcd\n", 'line';
+is ogdl.parse("ab,cd\n",      :rule<line>), "ab,cd\n", 'line';
 ok ogdl.parse("    ip    192.168.0.10\n", :rule<line>), 'line';
 ok ogdl.parse("network\n\f\n"), 'graph';
 ok ogdl.parse("network\n  eth0\n\f\n"), 'graph';
 ok ogdl.parse("network\n  eth0\n    ip    192.168.0.10\n\f\n"), 'graph';
-ok ogdl.parse("# a comment\n",:rule<comment>), 'graph';
-ok ogdl.parse("\n",:rule<line>), 'line';
+ok ogdl.parse("# a comment\n", :rule<comment>), 'graph';
+ok ogdl.parse("\n",            :rule<line>), 'line';
 my $graph = qq:to/DONE/;
 network
   eth0
